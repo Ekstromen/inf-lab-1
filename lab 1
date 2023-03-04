@@ -1,35 +1,49 @@
+#define _CRT_SECURE_NO_DEPRECATE
 #include <iostream>
 #include <cstdlib> 
 #include <cmath>
 
+
 int main()
 {
 	setlocale(LC_ALL, "rus");
-	printf("Какое выражение точнее: 1) 16/19 = 0.842 или 2) sqrt(55) = 7.416\n");
-	printf("1) 16/19 = %f\n", 16/19.);
-	printf("2) sqrt(55) = %f\n", sqrt(55));
+	printf("Введите значение a:\n");
+	double a = 0;
+	scanf("%lf", &a);
+	printf("Введите значение b:\n");
+	double b = 0;
+	scanf("%lf", &b);
+	printf("Введите значение c:\n");
+	double c = 0;
+	scanf("%lf", &c);
+	printf("Значения выражений с большим количеством десятичных знаков:\n");
+	printf("1) %.0lf/%.0lf = %lf\n", a, b, a / b);
+	printf("2) sqrt(%.0lf) = %lf\n", c, sqrt(c));
+	double x = (a / b) - fabs(round(((a / b) * 1000)) / 1000);
+	double y = (sqrt(c)) - fabs(round(((sqrt(c)) * 100)) / 100);
 	printf("Предельные абсолютные погрешности, округляя их с избытком:\n");
-	printf("1) %f\n", fabs((16 / 19.) - 0.842));
-	printf("2) %f\n", fabs(sqrt(55) - 7.416));
-	printf("Предельные абсолютные погрешности составляют в %:\n");
-	printf("1) %f\n", ((fabs((16 / 19.) - 0.842)) / 0.842)*100);
-	printf("2) %f\n", (fabs((sqrt(55) - 7.416) / 7.416))*100);
-	if (fabs((16 / 19.) - 0.842) < fabs(sqrt(55) - 7.416)) printf("Значит, более точное выражение: 16/19 = 0.842\n");
-	else printf("Значит, более точное выражение: sqrt(55) = 7.416\n");
+	printf("1) %lf\n", fabs(x));
+	printf("2) %lf\n", fabs(y));
+	printf("Предельные абсолютные погрешности составляют в %% \n");
+	double x1 = (fabs(x) / (a / b)) * 100;
+	double y1 = (fabs(y) / sqrt(c)) * 100;
+	printf("1) %lf %% \n", x1);
+	printf("2) %lf %% \n", y1);
+	if (x1 < y1) printf("Значит, более точное выражение: %.0f / %.0f = %f\n", a, b, a / b);
+	else printf("Значит, более точное выражение: sqrt(%.0f) = %f\n", c , sqrt(c));
 
-	printf("\n");
-	printf("Округлить сомнительные цифры числа, оставив верные знаки. Определить абсолютную погрешность результата.\n");
-	printf("Число = 17.356, предельная погрешность = 0.11%\n");
-	int x = 10;
-	int z = 17.356;
-	for (int i = 0; i != 1;) {
-		if (z / x < 0.0011) continue;
-		else {
-			printf("%f", z / x);
-			i = 1;
-			break;
-		}
-		x = x / 10;
+	printf("Введите число:\n");
+	scanf("%lf", &a);
+	printf("Введите относительная погрешность:\n");
+	scanf("%lf", &b);
+	for (;a > 1; a--);
+	double f = 0;
+	double g = 0;
+	for (int i = 1; i < 5 ;i++) {
+		f = floor(a * pow(10, i)) / pow(10, i);
+		g += f;
+		
+		printf("%lf\n",f);
 	}
 
 	
